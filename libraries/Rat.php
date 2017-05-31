@@ -61,7 +61,7 @@ class Rat
 
 
 
-    private function _set_message($message,$user_id,$code)
+    protected function _set_message($message,$user_id,$code)
     {
         if($this->_store_in == 'database')
         {
@@ -100,7 +100,7 @@ class Rat
         return FALSE;
     }
 
-    private function _get_messages($user_id = NULL, $code = NULL, $date = NULL, $order_by = NULL, $limit = NULL)
+    protected function _get_messages($user_id = NULL, $code = NULL, $date = NULL, $order_by = NULL, $limit = NULL)
     {
         if($this->_store_in == 'database')
         {
@@ -140,7 +140,7 @@ class Rat
         }
     }
 
-    private function _delete_logs($user_id = NULL,$date = NULL)
+    protected function _delete_logs($user_id = NULL,$date = NULL)
     {
         $where = array();
         if($this->_store_in == 'database')
@@ -173,7 +173,7 @@ class Rat
         }
     }
 
-    private function _set_directory()
+    protected function _set_directory()
     {
         if($this->_store_in!=='database')
         {
@@ -181,7 +181,7 @@ class Rat
         }
     }
 
-    private function _verify_settings()
+    protected function _verify_settings()
     {
         if($this->_store_in == 'database')
         {
