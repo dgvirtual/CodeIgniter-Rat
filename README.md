@@ -1,6 +1,11 @@
-# CodeIgniter Rat
+# CodeIgniter Rat (Extended to include the content of the transaction in the log as a json string)
 
 CodeIgniter Rat is a library that allows you to log whatever you want in a database table.
+
+The original, created by @avenirer, is here: 
+https://github.com/avenirer/CodeIgniter-Rat
+
+It was modified a little to allow for saving the whole content of the operation that is logged.
 
 ## Installing
 
@@ -14,6 +19,7 @@ CREATE TABLE `rat` (
   `date_time` datetime DEFAULT NULL,
   `code` int(11) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
+  `content_json` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
@@ -28,12 +34,12 @@ CREATE TABLE `rat` (
 
 You can either autoload the library (I don't advise you to do that), or load the library where you want to use it:
 ```php
-$this->load->library('rat');
+$this->load->library('RatExtended');
 ```
 
-### log($message, $code = 0, $user_id = 0)
+### log($message, $code = 0, $user_id = 0, $content = array())
 
-The log() method allows you to write the log. You must pass it the `$message` you want to write. If you didn't set the `$config['session_user_id']`, you can also pass it a user ID. For your convenience, you also can pass a code of the message; who knows, maybe you want to have different colors on the messages when you output the logs. You can do that by passing a code to the message you write.
+The log() method allows you to write the log. You must pass it the `$message` you want to write. If you didn't set the `$config['session_user_id']`, you can also pass it a user ID. For your convenience, you also can pass a code of the message; who knows, maybe you want to have different colors on the messages when you output the logs. You can do that by passing a code to the message you write. $content can contain an array of the data of a transaction you want to log - it will be recoded as a json string.
 
 ### get_log($user_id = NULL, $code = NULL, $date = NULL, $order_by = NULL, $limit = NULL)
 
